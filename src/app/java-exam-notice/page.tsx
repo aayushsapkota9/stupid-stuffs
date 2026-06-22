@@ -1,32 +1,62 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
 import {
-  IconPhone,
-  IconMail,
-  IconClock,
-  IconCalendar,
-  IconBook,
   IconAward,
-  IconLanguage,
-  IconSearch,
+  IconBook,
+  IconCalendar,
   IconChevronDown,
+  IconClock,
   IconExternalLink,
+  IconLanguage,
+  IconMail,
   IconMenu2,
+  IconPhone,
+  IconSearch,
   IconX,
 } from '@tabler/icons-react';
+import React, { useEffect, useState } from 'react';
 
 // Define the 12 languages and translation contents
 const LANGUAGES = [
   { code: 'en', name: 'English', desc: 'Official Announcement', flag: '🇬🇧' },
   { code: 'ne', name: 'नेपाली (Nepali)', desc: 'आधिकारिक सूचना', flag: '🇳🇵' },
-  { code: 'ne_brainrot', name: 'नेपाली Brainrot', desc: 'नो क्याप fr fr', flag: '🧠🇳🇵' },
-  { code: 'sanskrit', name: 'संस्कृतम् (Sanskrit)', desc: 'प्राचीन-आधिकारिक-पत्रम्', flag: '🛕' },
-  { code: 'pirate', name: 'Pirate (Arrr!)', desc: 'Scurvy Dog Notice', flag: '🏴‍☠️' },
-  { code: 'brainrot', name: 'Gen Z / Brainrot', desc: 'No cap fr fr', flag: '🧠' },
-  { code: 'doge', name: 'Doge Speak', desc: 'Much Java, very grade', flag: '🐕' },
+  {
+    code: 'ne_brainrot',
+    name: 'नेपाली Brainrot',
+    desc: 'नो क्याप fr fr',
+    flag: '🧠🇳🇵',
+  },
+  {
+    code: 'sanskrit',
+    name: 'संस्कृतम् (Sanskrit)',
+    desc: 'प्राचीन-आधिकारिक-पत्रम्',
+    flag: '🛕',
+  },
+  {
+    code: 'pirate',
+    name: 'Pirate (Arrr!)',
+    desc: 'Scurvy Dog Notice',
+    flag: '🏴‍☠️',
+  },
+  {
+    code: 'brainrot',
+    name: 'Gen Z / Brainrot',
+    desc: 'No cap fr fr',
+    flag: '🧠',
+  },
+  {
+    code: 'doge',
+    name: 'Doge Speak',
+    desc: 'Much Java, very grade',
+    flag: '🐕',
+  },
   { code: 'yoda', name: 'Yoda Style', desc: 'Exam there is, yes', flag: '👽' },
-  { code: 'minion', name: 'Minion (Banana)', desc: 'Tulaliloo ti amo!', flag: '🍌' },
+  {
+    code: 'minion',
+    name: 'Minion (Banana)',
+    desc: 'Tulaliloo ti amo!',
+    flag: '🍌',
+  },
   { code: 'leet', name: 'L337 Sp34k', desc: 'H4ck3r n071c3', flag: '💻' },
   { code: 'piglatin', name: 'Pig Latin', desc: 'Examway Oticenay', flag: '🐷' },
   { code: 'emoji', name: 'Emoji Only', desc: '☕📝⏰🙌', flag: '✨' },
@@ -41,7 +71,8 @@ const TRANSLATIONS: Record<string, any> = {
     refNo: 'Ref No: OCEM/EXAM/2026/104',
     dateLabel: 'Date: June 22, 2026',
     docTitle: 'NOTICE ON JAVA MCQ INTERNAL EXAMINATION',
-    noticeText: 'There will be a Java MCQ exam the day after tomorrow. Please make sure to attend the exam. Your participation is highly appreciated. It will also carry 5 marks internal.',
+    noticeText:
+      'There will be a Java MCQ exam the day after tomorrow. Please make sure to attend the exam. Your participation is highly appreciated. It will also carry 5 marks internal.',
     tableHeaderItem: 'Examination Detail',
     tableHeaderVal: 'Scheduled Value',
     rowDate: 'Exam Date',
@@ -61,17 +92,29 @@ const TRANSLATIONS: Record<string, any> = {
     btnSyllabusClose: 'Hide Exam Syllabus Details',
     syllabusTitle: 'Syllabus Core Coverage',
     syllabusTopics: [
-      { name: 'Object-Oriented Programming', detail: 'Inheritance, Polymorphism, Abstract classes, Interfaces' },
-      { name: 'Exceptions & File I/O', detail: 'Try-catch blocks, Custom exception, Streams, File class' },
-      { name: 'Collections Framework', detail: 'List, Set, Map implementation details, Generics' }
+      {
+        name: 'Object-Oriented Programming',
+        detail: 'Inheritance, Polymorphism, Abstract classes, Interfaces',
+      },
+      {
+        name: 'Exceptions & File I/O',
+        detail: 'Try-catch blocks, Custom exception, Streams, File class',
+      },
+      {
+        name: 'Collections Framework',
+        detail: 'List, Set, Map implementation details, Generics',
+      },
     ],
     signName: 'Er. Hari Bastola',
     signTitle: 'Chief Controller of Examinations',
-    marqueeText: '🚨 URGENT ACADEMIC NOTICE: JAVA MCQ INTERNAL EXAMINATION SCHEDULED FOR JUNE 24, 2026 AT 08:20 AM. PARTICIPATION IS MANDATORY FOR INTERNAL ASSESSMENT.',
+    marqueeText:
+      '🚨 URGENT ACADEMIC NOTICE: JAVA MCQ INTERNAL EXAMINATION SCHEDULED FOR JUNE 24, 2026 AT 08:20 AM. PARTICIPATION IS MANDATORY FOR INTERNAL ASSESSMENT.',
     selectTitle: 'Official Student Portal Access',
-    selectDesc: 'Please select a language translation below to view the exam announcement board.',
+    selectDesc:
+      'Please select a language translation below to view the exam announcement board.',
     changeLang: 'Change Notice Language',
-    calendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall'
+    calendarUrl:
+      'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall',
   },
   ne: {
     collegeName: 'अक्सफोर्ड कलेज अफ इन्जिनियरिङ्ग एण्ड म्यानेजमेन्ट',
@@ -81,7 +124,8 @@ const TRANSLATIONS: Record<string, any> = {
     refNo: 'पत्र संख्या: अ.क.म./परीक्षा/२०८३/१०४',
     dateLabel: 'मिति: असार ८, २०८३',
     docTitle: 'जाभा MCQ आन्तरिक परीक्षा सम्बन्धी सूचना',
-    noticeText: 'पर्सी Java MCQ परीक्षा हुनेछ। कृपया परीक्षामा सहभागी हुन सुनिश्चित गर्नुहोला। तपाईंको सहभागिताको उच्च कदर गरिनेछ। यसले ५ आन्तरिक अंक (internal marks) पनि बोक्नेछ।',
+    noticeText:
+      'पर्सी Java MCQ परीक्षा हुनेछ। कृपया परीक्षामा सहभागी हुन सुनिश्चित गर्नुहोला। तपाईंको सहभागिताको उच्च कदर गरिनेछ। यसले ५ आन्तरिक अंक (internal marks) पनि बोक्नेछ।',
     tableHeaderItem: 'परीक्षा विवरण',
     tableHeaderVal: 'तालिका विवरण',
     rowDate: 'परीक्षा मिति',
@@ -101,17 +145,28 @@ const TRANSLATIONS: Record<string, any> = {
     btnSyllabusClose: 'पाठ्यक्रम विवरण लुकाउनुहोस्',
     syllabusTitle: 'परीक्षाको मुख्य पाठ्यक्रम',
     syllabusTopics: [
-      { name: 'अब्जेक्ट-ओरिएन्टेड प्रोग्रामिङ', detail: 'इन्हेरिटेन्स, पोलिमर्फिज्म, एब्स्ट्र्याक्ट क्लास, इन्टरफेस' },
-      { name: 'एक्सेप्सन ह्यान्डलिङ र फाइल I/O', detail: 'ट्राइ-क्याच ब्लक, कस्टम एक्सेप्सन, स्ट्रिमहरू' },
-      { name: 'कलेक्सन्स फ्रेमवर्क', detail: 'लिस्ट, सेट, म्याप इम्प्लिमेन्टेसन र जेनेरिक्स' }
+      {
+        name: 'अब्जेक्ट-ओरिएन्टेड प्रोग्रामिङ',
+        detail: 'इन्हेरिटेन्स, पोलिमर्फिज्म, एब्स्ट्र्याक्ट क्लास, इन्टरफेस',
+      },
+      {
+        name: 'एक्सेप्सन ह्यान्डलिङ र फाइल I/O',
+        detail: 'ट्राइ-क्याच ब्लक, कस्टम एक्सेप्सन, स्ट्रिमहरू',
+      },
+      {
+        name: 'कलेक्सन्स फ्रेमवर्क',
+        detail: 'लिस्ट, सेट, म्याप इम्प्लिमेन्टेसन र जेनेरिक्स',
+      },
     ],
     signName: 'इ. हरी बास्तोला',
     signTitle: 'मुख्य परीक्षा नियन्त्रक',
-    marqueeText: '🚨 जरुरी सूचना: जाभा MCQ आन्तरिक परीक्षा असार १० गते बुधबार बिहान ८:२० बजे हुनेछ। परीक्षामा उपस्थिति अनिवार्य छ।',
+    marqueeText:
+      '🚨 जरुरी सूचना: जाभा MCQ आन्तरिक परीक्षा असार १० गते बुधबार बिहान ८:२० बजे हुनेछ। परीक्षामा उपस्थिति अनिवार्य छ।',
     selectTitle: 'आधिकारिक विद्यार्थी पोर्टल',
     selectDesc: 'परीक्षा सूचना बोर्ड हेर्नको लागि कृपया तल भाषा चयन गर्नुहोस्।',
     changeLang: 'सूचनाको भाषा परिवर्तन गर्नुहोस्',
-    calendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall'
+    calendarUrl:
+      'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall',
   },
   ne_brainrot: {
     collegeName: 'अक्सफोर्ड स्किबिडी कलेज FR FR',
@@ -121,7 +176,8 @@ const TRANSLATIONS: Record<string, any> = {
     refNo: 'म्युइङ टिकट: अ.क.म./ग्यात/२०८३/१०४',
     dateLabel: 'ग्राइन्ड मिति: असार ८, २०८३',
     docTitle: 'जाभा MCQ फाइनल बस परीक्षा सम्बन्धी सूचना FR',
-    noticeText: 'यो जाभा MCQ परीक्षा पर्सी हुनेछ fr fr नो क्याप। कृपया परीक्षामा सहभागी हुन सुनिश्चित गर्नुहोला fr। यदि तपाईं आउनुभएन भने तपाईं कक्ड (cooked) भइन्छ ब्रो। यसले ५ आउरा पोइन्ट (aura points) बोक्नेछ, जुन एकदमै रिज (rizz) हो।',
+    noticeText:
+      'यो जाभा MCQ परीक्षा पर्सी हुनेछ fr fr नो क्याप। कृपया परीक्षामा सहभागी हुन सुनिश्चित गर्नुहोला fr। यदि तपाईं आउनुभएन भने तपाईं कक्ड (cooked) भइन्छ ब्रो। यसले ५ आउरा पोइन्ट (aura points) बोक्नेछ, जुन एकदमै रिज (rizz) हो।',
     tableHeaderItem: 'ग्राइन्ड विवरण',
     tableHeaderVal: 'आउरा भ्यालु',
     rowDate: 'ग्राइन्ड मिति',
@@ -141,14 +197,25 @@ const TRANSLATIONS: Record<string, any> = {
     btnSyllabusClose: 'सस विवरण लुकाउनुहोस्',
     syllabusTitle: 'स्किबिडी परीक्षा गाइड',
     syllabusTopics: [
-      { name: 'OOP रिजोलोजी', detail: 'इन्हेरिटिङ ट्रेड्स, पोलिमर्फिङ लुक, क्लास इन्टरफेस' },
-      { name: 'L हरू क्याच गर्ने (एक्सेप्सन)', detail: 'ट्राइ-क्याच द भाइब, कस्टम एरर, क्र्यास आउट' },
-      { name: 'एरे र्‍याक र ह्यास-म्यापहरू', detail: 'ग्यातहरूको सूची, म्यापिङ कि एलिमेन्टहरू' }
+      {
+        name: 'OOP रिजोलोजी',
+        detail: 'इन्हेरिटिङ ट्रेड्स, पोलिमर्फिङ लुक, क्लास इन्टरफेस',
+      },
+      {
+        name: 'L हरू क्याच गर्ने (एक्सेप्सन)',
+        detail: 'ट्राइ-क्याच द भाइब, कस्टम एरर, क्र्यास आउट',
+      },
+      {
+        name: 'एरे र्‍याक र ह्यास-म्यापहरू',
+        detail: 'ग्यातहरूको सूची, म्यापिङ कि एलिमेन्टहरू',
+      },
     ],
     signName: 'चीफ रिज्लर हरी बास्तोला',
     signTitle: 'आउरा नियन्त्रण निर्देशक',
-    marqueeText: '🔥 नो क्याप: जाभा MCQ परीक्षा पर्सी बिहान ८:२० बजे हुनेछ। लिनुहोला नत्र १०० आउरा पोइन्ट गुम्नेछ fr fr!',
-    calendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall'
+    marqueeText:
+      '🔥 नो क्याप: जाभा MCQ परीक्षा पर्सी बिहान ८:२० बजे हुनेछ। लिनुहोला नत्र १०० आउरा पोइन्ट गुम्नेछ fr fr!',
+    calendarUrl:
+      'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall',
   },
   sanskrit: {
     collegeName: 'ओक्सफोर्ड अभियान्त्रिकी एवं प्रबन्धन महाविद्यालयः',
@@ -158,7 +225,8 @@ const TRANSLATIONS: Record<string, any> = {
     refNo: 'पत्र संख्या: ओ.सी.ई.एम./परीक्षा/२०२६/१०४',
     dateLabel: 'दिनाङ्कः: २२ जुन २०२६',
     docTitle: 'जाभा बहुविकल्पीयपरीक्षायाः (MCQ) सूचना',
-    noticeText: 'परश्वः जाभा बहुविकल्पीयप्रश्नोत्तरी (MCQ) परीक्षा भविष्यति। कृपया परीक्षायां भागं ग्रहीतुं सुनिश्चितं कुर्वन्तु। भवतः सहभागिता उच्चप्रशंसनीया अस्ति। अस्याः परीक्षायाः पञ्च आन्तरिक-अङ्काः (५ marks internal) अपि सन्ति।',
+    noticeText:
+      'परश्वः जाभा बहुविकल्पीयप्रश्नोत्तरी (MCQ) परीक्षा भविष्यति। कृपया परीक्षायां भागं ग्रहीतुं सुनिश्चितं कुर्वन्तु। भवतः सहभागिता उच्चप्रशंसनीया अस्ति। अस्याः परीक्षायाः पञ्च आन्तरिक-अङ्काः (५ marks internal) अपि सन्ति।',
     tableHeaderItem: 'परीक्षा विवरणम्',
     tableHeaderVal: 'निर्धारितं मूल्यम्',
     rowDate: 'परीक्षा तिथिः',
@@ -178,26 +246,38 @@ const TRANSLATIONS: Record<string, any> = {
     btnSyllabusClose: 'पाठ्यक्रमं गोपयतु',
     syllabusTitle: 'मुख्य पाठ्यक्रमः',
     syllabusTopics: [
-      { name: 'वस्तु-अभिमुखी प्रोग्रामिङ (OOP)', detail: 'उत्तराधिकारः, बहुरूपता, अमूर्तवर्गाः, अन्तराफलकम्' },
-      { name: 'अपवादप्रबन्धनं फाइल I/O च', detail: 'त्रुटीग्रहणं, स्वकीय-अपवादाः, धाराः (Streams)' },
-      { name: 'सङ्ग्रह संरचना (Collections Framework)', detail: 'सूची, समुच्चयः, मानचित्रं तथा जेनेरिक्स' }
+      {
+        name: 'वस्तु-अभिमुखी प्रोग्रामिङ (OOP)',
+        detail: 'उत्तराधिकारः, बहुरूपता, अमूर्तवर्गाः, अन्तराफलकम्',
+      },
+      {
+        name: 'अपवादप्रबन्धनं फाइल I/O च',
+        detail: 'त्रुटीग्रहणं, स्वकीय-अपवादाः, धाराः (Streams)',
+      },
+      {
+        name: 'सङ्ग्रह संरचना (Collections Framework)',
+        detail: 'सूची, समुच्चयः, मानचित्रं तथा जेनेरिक्स',
+      },
     ],
     signName: 'इ. हरी बास्तोला',
     signTitle: 'मुख्य परीक्षा नियन्त्रकः',
-    marqueeText: '🚨 परीक्षा सूचना: परश्वः प्रातः ०८:२० वादने जाभा परीक्षा भविष्यति। सर्वेषां उपस्थितिः अनिवार्या अस्ति।',
-    calendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall'
+    marqueeText:
+      '🚨 परीक्षा सूचना: परश्वः प्रातः ०८:२० वादने जाभा परीक्षा भविष्यति। सर्वेषां उपस्थितिः अनिवार्या अस्ति।',
+    calendarUrl:
+      'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall',
   },
   pirate: {
-    collegeName: 'THE OXFORD SHIP O\' ENGINEERING & MANAGEMENT',
+    collegeName: "THE OXFORD SHIP O' ENGINEERING & MANAGEMENT",
     affiliation: '(Commissioned by Pokhara Crew)',
     address: 'Tortuga Haven, Gaindakot Shore',
-    boardTitle: 'COMMODORE\'S GUNNERY OFFICE',
-    refNo: 'Captain\'s Log No: OCEM/PLANK/2026/104',
-    dateLabel: 'Day o\' Sea: June 22, 2026',
+    boardTitle: "COMMODORE'S GUNNERY OFFICE",
+    refNo: "Captain's Log No: OCEM/PLANK/2026/104",
+    dateLabel: "Day o' Sea: June 22, 2026",
     docTitle: 'SCURVY DOG WARNING: JAVA MCQ SEA TRIAL',
-    noticeText: 'Ahoy Mateys! There be a Java MCQ trial on the horizon, day after tomorrow! Get yer boots on deck and take the test, or walk the plank! High honors to them who show up. It carries 5 pieces of gold (internal marks) for yer rank!',
+    noticeText:
+      'Ahoy Mateys! There be a Java MCQ trial on the horizon, day after tomorrow! Get yer boots on deck and take the test, or walk the plank! High honors to them who show up. It carries 5 pieces of gold (internal marks) for yer rank!',
     tableHeaderItem: 'Trial Log',
-    tableHeaderVal: 'Captain\'s Decree',
+    tableHeaderVal: "Captain's Decree",
     rowDate: 'Trial Day',
     rowDateVal: 'When the Sun Rises Two Days Hence',
     rowTime: 'Tide Time',
@@ -215,17 +295,29 @@ const TRANSLATIONS: Record<string, any> = {
     btnSyllabusClose: 'Roll up the Map',
     syllabusTitle: 'Scurvy Crew Syllabus',
     syllabusTopics: [
-      { name: 'Oop-ay Cannon Loadin\'', detail: 'Inheritin\' booty, polymorphin\' shape, captain interface' },
-      { name: 'Catchin\' Scurvy Exceptions', detail: 'Try-catch hold, custom curses, sea-streams' },
-      { name: 'Chest o\' Lists & Maps', detail: 'Crews o\' Arrays, HashMaps o\' Gold' }
+      {
+        name: "Oop-ay Cannon Loadin'",
+        detail: "Inheritin' booty, polymorphin' shape, captain interface",
+      },
+      {
+        name: "Catchin' Scurvy Exceptions",
+        detail: 'Try-catch hold, custom curses, sea-streams',
+      },
+      {
+        name: "Chest o' Lists & Maps",
+        detail: "Crews o' Arrays, HashMaps o' Gold",
+      },
     ],
     signName: 'Commodore Blackbeard Bastola',
     signTitle: 'Master Gunner of Exams',
-    marqueeText: '🏴‍☠️ AHOY! JAVA MCQ TEST SHAPING UP IN TWO SUNRISES! PREPARE YER COMPASS AND DO NOT MISS THE BOOTY!',
-    selectTitle: 'Captain\'s Cabin Access',
-    selectDesc: 'Unroll the parchment and select yer dialect to read the Commodore\'s orders.',
+    marqueeText:
+      '🏴‍☠️ AHOY! JAVA MCQ TEST SHAPING UP IN TWO SUNRISES! PREPARE YER COMPASS AND DO NOT MISS THE BOOTY!',
+    selectTitle: "Captain's Cabin Access",
+    selectDesc:
+      "Unroll the parchment and select yer dialect to read the Commodore's orders.",
     changeLang: 'Swap Dialect',
-    calendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall'
+    calendarUrl:
+      'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall',
   },
   brainrot: {
     collegeName: 'OXFORD SKIBIDI COLLEGE FR FR',
@@ -235,7 +327,8 @@ const TRANSLATIONS: Record<string, any> = {
     refNo: 'Mewing Ticket: OCEM/GYATT/2026/104',
     dateLabel: 'Mew Date: June 22, 2026',
     docTitle: 'NOTICE: JAVA MCQ FINAL BOSS IS COMING FR',
-    noticeText: 'Yo, no cap fr fr, there is a Java MCQ exam day after tomorrow. Absolute W if you pull up, don\'t miss it or you\'re cooked. It\'s giving 5 marks internal assessment, that\'s pure rizz.',
+    noticeText:
+      "Yo, no cap fr fr, there is a Java MCQ exam day after tomorrow. Absolute W if you pull up, don't miss it or you're cooked. It's giving 5 marks internal assessment, that's pure rizz.",
     tableHeaderItem: 'Grind Status',
     tableHeaderVal: 'Aura Value',
     rowDate: 'Grind Day',
@@ -251,21 +344,33 @@ const TRANSLATIONS: Record<string, any> = {
     mins: 'MINS',
     secs: 'SECS',
     btnCalendar: 'Pin to Calendar fr',
-    btnSyllabusOpen: 'Syllabus lookin\' kinda sus',
+    btnSyllabusOpen: "Syllabus lookin' kinda sus",
     btnSyllabusClose: 'Close sus details',
     syllabusTitle: 'Skibidi Study Guide',
     syllabusTopics: [
-      { name: 'OOP Rizzology', detail: 'Inheriting traits, polymorphing look, class interfaces' },
-      { name: 'Catching Ls (Exceptions)', detail: 'Try-catch the vibe, custom errors, crash outs' },
-      { name: 'Array Racks & HashMaps', detail: 'List of gyatts, mapping key elements' }
+      {
+        name: 'OOP Rizzology',
+        detail: 'Inheriting traits, polymorphing look, class interfaces',
+      },
+      {
+        name: 'Catching Ls (Exceptions)',
+        detail: 'Try-catch the vibe, custom errors, crash outs',
+      },
+      {
+        name: 'Array Racks & HashMaps',
+        detail: 'List of gyatts, mapping key elements',
+      },
     ],
     signName: 'Chief Rizzler Bastola',
     signTitle: 'Director of Aura Control',
-    marqueeText: '🔥 NO CAP: JAVA MCQ EXAM DAY AFTER TOMORROW AT 08:20 AM. PULL UP OR GET COOKEED AND LOSE 1000 AURA POINTS!',
+    marqueeText:
+      '🔥 NO CAP: JAVA MCQ EXAM DAY AFTER TOMORROW AT 08:20 AM. PULL UP OR GET COOKEED AND LOSE 1000 AURA POINTS!',
     selectTitle: 'Student Lobby Rizz Select',
-    selectDesc: 'Choose your language pack to read the absolute blueprint for the exam.',
+    selectDesc:
+      'Choose your language pack to read the absolute blueprint for the exam.',
     changeLang: 'Change Notice Language',
-    calendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall'
+    calendarUrl:
+      'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall',
   },
   doge: {
     collegeName: 'OXFORD COLLAGE OF MUCH ENGINEER & SO MANAGE',
@@ -275,7 +380,8 @@ const TRANSLATIONS: Record<string, any> = {
     refNo: 'Wow Ref: OCEM/DOGE/2026/104',
     dateLabel: 'Doge Date: June 22, 2026',
     docTitle: 'VERY IMPORTANT: JAVA MCQ TEST NOTICE WOW',
-    noticeText: 'Wow! Day after tomorrow has Java MCQ test. Very attendance. Much appreciated. So 5 internal marks. Such grade. Many coding. Wow.',
+    noticeText:
+      'Wow! Day after tomorrow has Java MCQ test. Very attendance. Much appreciated. So 5 internal marks. Such grade. Many coding. Wow.',
     tableHeaderItem: 'Doge Topic',
     tableHeaderVal: 'Much Detail',
     rowDate: 'Such Date',
@@ -295,17 +401,29 @@ const TRANSLATIONS: Record<string, any> = {
     btnSyllabusClose: 'Much Hide',
     syllabusTitle: 'Much Topics to Learn',
     syllabusTopics: [
-      { name: 'OOPs Classes Wow', detail: 'Much inheritance, very polymorph, so interface' },
-      { name: 'Catch Errors Wow', detail: 'Try-catch exceptions, very custom error, so stream' },
-      { name: 'Collection Lists Map', detail: 'Many arraylist, much hashmap, so iterate' }
+      {
+        name: 'OOPs Classes Wow',
+        detail: 'Much inheritance, very polymorph, so interface',
+      },
+      {
+        name: 'Catch Errors Wow',
+        detail: 'Try-catch exceptions, very custom error, so stream',
+      },
+      {
+        name: 'Collection Lists Map',
+        detail: 'Many arraylist, much hashmap, so iterate',
+      },
     ],
     signName: 'Shiba Bastola',
     signTitle: 'Chief Doge of Exam Department',
-    marqueeText: '🐕 WOW! JAVA MCQ EXAM SCHEDULED FOR JUNE 24. VERY ATTENDANCE! MANY GRADES! MUCH INTERNAL VALUE! WOW!',
+    marqueeText:
+      '🐕 WOW! JAVA MCQ EXAM SCHEDULED FOR JUNE 24. VERY ATTENDANCE! MANY GRADES! MUCH INTERNAL VALUE! WOW!',
     selectTitle: 'Doge Entrance Gate',
-    selectDesc: 'Select language to enter much notice. Very info. So simple. Wow.',
+    selectDesc:
+      'Select language to enter much notice. Very info. So simple. Wow.',
     changeLang: 'Much Change Lang',
-    calendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall'
+    calendarUrl:
+      'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall',
   },
   yoda: {
     collegeName: 'OXFORD ACADEMY OF FORCE & CODES',
@@ -315,7 +433,8 @@ const TRANSLATIONS: Record<string, any> = {
     refNo: 'Jedi Order Ref: OCEM/YODA/2026/104',
     dateLabel: 'Chronology: June 22, 2026',
     docTitle: 'EXAM NOTICE: JAVA MCQ TEST, COMING IT IS',
-    noticeText: 'Java MCQ exam, day after tomorrow there will be. Attend, you must. Appreciated, your presence is. 5 internal marks, it carries. Miss it, do not.',
+    noticeText:
+      'Java MCQ exam, day after tomorrow there will be. Attend, you must. Appreciated, your presence is. 5 internal marks, it carries. Miss it, do not.',
     tableHeaderItem: 'Trial Detail',
     tableHeaderVal: 'Jedi Records',
     rowDate: 'Day of Force',
@@ -335,17 +454,29 @@ const TRANSLATIONS: Record<string, any> = {
     btnSyllabusClose: 'Close Holocron',
     syllabusTitle: 'Path of the Java Padawan',
     syllabusTopics: [
-      { name: 'Way of the OOP', detail: 'Inheritance paths, polymorphic shapes, interfaces of power' },
-      { name: 'Disturbance in Force (Exceptions)', detail: 'Try-catch barriers, custom anomalies, IO flows' },
-      { name: 'Collections of Holocrons', detail: 'Storage of Lists, Maps of memory, generic algorithms' }
+      {
+        name: 'Way of the OOP',
+        detail: 'Inheritance paths, polymorphic shapes, interfaces of power',
+      },
+      {
+        name: 'Disturbance in Force (Exceptions)',
+        detail: 'Try-catch barriers, custom anomalies, IO flows',
+      },
+      {
+        name: 'Collections of Holocrons',
+        detail: 'Storage of Lists, Maps of memory, generic algorithms',
+      },
     ],
     signName: 'Jedi Master Bastola',
     signTitle: 'Grand Chancellor of Testing',
-    marqueeText: '👽 DO OR DO NOT, THERE IS NO TRY. JAVA MCQ EXAM ON WEDNESDAY AT 08:20 AM. FIVE INTERNAL MARKS TO GAIN.',
+    marqueeText:
+      '👽 DO OR DO NOT, THERE IS NO TRY. JAVA MCQ EXAM ON WEDNESDAY AT 08:20 AM. FIVE INTERNAL MARKS TO GAIN.',
     selectTitle: 'Select Jedi Archives Portal',
-    selectDesc: 'Select your local system dialect to decode the transmission from the Council.',
+    selectDesc:
+      'Select your local system dialect to decode the transmission from the Council.',
     changeLang: 'Change Dialect',
-    calendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall'
+    calendarUrl:
+      'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall',
   },
   minion: {
     collegeName: 'OXFORD BANANA DE EN-GE-NYER & MA-NA-GE',
@@ -355,7 +486,8 @@ const TRANSLATIONS: Record<string, any> = {
     refNo: 'Bello Ref: OCEM/BANANA/2026/104',
     dateLabel: 'Banana Date: June 22, 2026',
     docTitle: 'BELLO! JAVA MCQ TEST DAY AFTER TOMORROW!',
-    noticeText: 'Bello! Java MCQ test day after tomorrow! Tulaliloo ti amo! Please attend exam, tank yu! Carry 5 banana marks! Muak muak muak!',
+    noticeText:
+      'Bello! Java MCQ test day after tomorrow! Tulaliloo ti amo! Please attend exam, tank yu! Carry 5 banana marks! Muak muak muak!',
     tableHeaderItem: 'Banana Item',
     tableHeaderVal: 'Ba-na-na Info',
     rowDate: 'Banana Day',
@@ -375,17 +507,28 @@ const TRANSLATIONS: Record<string, any> = {
     btnSyllabusClose: 'Hide Banana',
     syllabusTitle: 'Banana Topics to Study',
     syllabusTopics: [
-      { name: 'OOP Ba-na-na Shapes', detail: 'Inheriting yellow color, morphing sizes, skin interfaces' },
-      { name: 'Exception Splatting', detail: 'Catching bananas, try-throw error splats' },
-      { name: 'Banana Storage Chest', detail: 'List of bananas, hashmap mapping monkeys to banana' }
+      {
+        name: 'OOP Ba-na-na Shapes',
+        detail: 'Inheriting yellow color, morphing sizes, skin interfaces',
+      },
+      {
+        name: 'Exception Splatting',
+        detail: 'Catching bananas, try-throw error splats',
+      },
+      {
+        name: 'Banana Storage Chest',
+        detail: 'List of bananas, hashmap mapping monkeys to banana',
+      },
     ],
     signName: 'Minion Bastola (Kevin)',
     signTitle: 'Chief Banana Officer',
-    marqueeText: '🍌 BELLO! JAVA MCQ TEST IN TWO BANANA SUNRISES! AT EIGHT TWENTY AM. TANK YU FOR ATTENDING!',
+    marqueeText:
+      '🍌 BELLO! JAVA MCQ TEST IN TWO BANANA SUNRISES! AT EIGHT TWENTY AM. TANK YU FOR ATTENDING!',
     selectTitle: 'Banana Language Selector',
     selectDesc: 'Muak muak! Choose language to read yellow paper instructions!',
     changeLang: 'Change Banana Language',
-    calendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall'
+    calendarUrl:
+      'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall',
   },
   leet: {
     collegeName: '0XF0RD C0LL3G3 0F 3NG1N33R1NG & M4N4G3M3N7',
@@ -395,7 +538,8 @@ const TRANSLATIONS: Record<string, any> = {
     refNo: 'L337 R3f: 0C3M/3X4M/2026/104',
     dateLabel: 'D473: Jun3 22, 2026',
     docTitle: 'N071C3: J4v4 MCQ 3X4M COM1NG 5OON',
-    noticeText: '7h3r3 w1ll b3 4 J4v4 MCQ 3x4m 7h3 d4y 4f73r 70m0rr0w. Pl3453 m4k3 5ur3 70 4773nd 7h3 3x4m. Y0ur p4r71c1p4710n 15 h1ghly 4ppr3c1473d. 17 w1ll 4l50 c4rry 5m4rk5 1n73rn4l.',
+    noticeText:
+      '7h3r3 w1ll b3 4 J4v4 MCQ 3x4m 7h3 d4y 4f73r 70m0rr0w. Pl3453 m4k3 5ur3 70 4773nd 7h3 3x4m. Y0ur p4r71c1p4710n 15 h1ghly 4ppr3c1473d. 17 w1ll 4l50 c4rry 5m4rk5 1n73rn4l.',
     tableHeaderItem: 'P4r4m373r',
     tableHeaderVal: 'V4lu3',
     rowDate: '3x4m D473',
@@ -415,17 +559,29 @@ const TRANSLATIONS: Record<string, any> = {
     btnSyllabusClose: 'H1d3 5yll4bu5',
     syllabusTitle: 'H4ck3r 5yll4bu5',
     syllabusTopics: [
-      { name: 'OOP Pwn4g3', detail: '1nh3r174nc3, p0lym0rph15m, 4b57r4c7 c0d35, 1n73rf4c35' },
-      { name: '3xc3p710n H4ck5 & I/O', detail: '7ry-c47ch, 7hr0w, cus70m pwn5, f1l357r34m5' },
-      { name: 'C0ll3c710n M3m0ry', detail: 'L157, 537, M4p structur35, J4v4 g3n3r1c5' }
+      {
+        name: 'OOP Pwn4g3',
+        detail: '1nh3r174nc3, p0lym0rph15m, 4b57r4c7 c0d35, 1n73rf4c35',
+      },
+      {
+        name: '3xc3p710n H4ck5 & I/O',
+        detail: '7ry-c47ch, 7hr0w, cus70m pwn5, f1l357r34m5',
+      },
+      {
+        name: 'C0ll3c710n M3m0ry',
+        detail: 'L157, 537, M4p structur35, J4v4 g3n3r1c5',
+      },
     ],
     signName: 'H4ck3r Bastola',
     signTitle: 'Ro0t Ex4m Adm1n1str4t0r',
-    marqueeText: '💻 ALERT: JAVA MCQ EXAM SCHEDULED FOR JUNE 24 AT 08:20 AM. RUN ATTENDANCE SCRIPT. INTERNAL MARKS = 5. DO NOT EXCEPTION.',
+    marqueeText:
+      '💻 ALERT: JAVA MCQ EXAM SCHEDULED FOR JUNE 24 AT 08:20 AM. RUN ATTENDANCE SCRIPT. INTERNAL MARKS = 5. DO NOT EXCEPTION.',
     selectTitle: 'L337 Sy573m Entry',
-    selectDesc: '53l3c7 c0d3p4g3 l4ngu4g3 70 d3cryp7 7h3 0f71c14l cl4551f13d n071c3.',
+    selectDesc:
+      '53l3c7 c0d3p4g3 l4ngu4g3 70 d3cryp7 7h3 0f71c14l cl4551f13d n071c3.',
     changeLang: 'Sw4p C0d3p4g3',
-    calendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall'
+    calendarUrl:
+      'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall',
   },
   piglatin: {
     collegeName: 'OXFORDWAY OLLEGEWAY OFWAY ENGINEERINGWAY & ANAGEMENTWAY',
@@ -435,7 +591,8 @@ const TRANSLATIONS: Record<string, any> = {
     refNo: 'Refway Oway: OCEM/EXAM/2026/104',
     dateLabel: 'Ateday: Unejay 22, 2026',
     docTitle: 'NOTICEWAY ONWAY JAVAWAY MCQ INTERNALWAY EXAMWAY',
-    noticeText: 'Heretay illway ebay ay Avajay MCQ-yay examay ethay ayday afterway omorrowtay. Leasepay akemay uresay otay attenday ethay examay. Ouryay articipationpay isway ighlyhay appreciatedway. Itway illway alsoway arrycay ivefay arksmay internalway.',
+    noticeText:
+      'Heretay illway ebay ay Avajay MCQ-yay examay ethay ayday afterway omorrowtay. Leasepay akemay uresay otay attenday ethay examay. Ouryay articipationpay isway ighlyhay appreciatedway. Itway illway alsoway arrycay ivefay arksmay internalway.',
     tableHeaderItem: 'Detailway',
     tableHeaderVal: 'Valuee-way',
     rowDate: 'Examway Ateday',
@@ -455,17 +612,26 @@ const TRANSLATIONS: Record<string, any> = {
     btnSyllabusClose: 'Hideway Syllabusway',
     syllabusTitle: 'Syllabusway',
     syllabusTopics: [
-      { name: 'OOPway Coreway', detail: 'Inheritanceway, Polymorphismway, Interfaceway' },
-      { name: 'Exceptionsway', detail: 'Try-catchway blocks, Customway errorway' },
-      { name: 'Collectionsway', detail: 'Listway, Setway, Mapway arraysway' }
+      {
+        name: 'OOPway Coreway',
+        detail: 'Inheritanceway, Polymorphismway, Interfaceway',
+      },
+      {
+        name: 'Exceptionsway',
+        detail: 'Try-catchway blocks, Customway errorway',
+      },
+      { name: 'Collectionsway', detail: 'Listway, Setway, Mapway arraysway' },
     ],
     signName: 'Erway. Hariway Bastolaway',
     signTitle: 'Chiefway Ontrollerway',
-    marqueeText: '🚨 EXAMWAY WARNINGWAY: JAVAWAY MCQ EXAMWAY ONWAY UNEJAY 24 AT 08:20 AMWAY. FIVEWAY ARKSMAY AT STAKEWAY.',
+    marqueeText:
+      '🚨 EXAMWAY WARNINGWAY: JAVAWAY MCQ EXAMWAY ONWAY UNEJAY 24 AT 08:20 AMWAY. FIVEWAY ARKSMAY AT STAKEWAY.',
     selectTitle: 'Portalway Entryway',
-    selectDesc: 'Selectway languageway belowway otay eadray ethay officialway documentway.',
+    selectDesc:
+      'Selectway languageway belowway otay eadray ethay officialway documentway.',
     changeLang: 'Changee-way Languageway',
-    calendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall'
+    calendarUrl:
+      'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall',
   },
   emoji: {
     collegeName: '🏫 OXFORD ENGINEERING & MANAGEMENT 🏫',
@@ -495,18 +661,26 @@ const TRANSLATIONS: Record<string, any> = {
     btnSyllabusClose: '📚❌ Hide',
     syllabusTitle: '📚 Core Syllabus',
     syllabusTopics: [
-      { name: 'OOP 🧱', detail: 'Inheritance 👨‍👦, Polymorphism 🔄, Interface 🔌' },
-      { name: 'Exceptions ⚠️', detail: 'Try-catch 🧤, Custom error 💥, Streams 🌊' },
-      { name: 'Collections 📦', detail: 'Lists 📋, Maps 🗺️, Generics 🛡️' }
+      {
+        name: 'OOP 🧱',
+        detail: 'Inheritance 👨‍👦, Polymorphism 🔄, Interface 🔌',
+      },
+      {
+        name: 'Exceptions ⚠️',
+        detail: 'Try-catch 🧤, Custom error 💥, Streams 🌊',
+      },
+      { name: 'Collections 📦', detail: 'Lists 📋, Maps 🗺️, Generics 🛡️' },
     ],
     signName: '🎓 Bastola Er. 🎓',
     signTitle: '👑🏛️ Exam Head',
-    marqueeText: '🚨 ☕ MCQ 📝 📅 06/24/2026 ⏰ 08:20 AM 🇳🇵 ❗ 5️⃣ 📈 ❗ 🚶‍♂️ Attendance mandatory ❗',
+    marqueeText:
+      '🚨 ☕ MCQ 📝 📅 06/24/2026 ⏰ 08:20 AM 🇳🇵 ❗ 5️⃣ 📈 ❗ 🚶‍♂️ Attendance mandatory ❗',
     selectTitle: '🌐 Portal Dialect selection',
     selectDesc: '👇 Click language icon below to open announcement board.',
     changeLang: '🌐 Swap Language',
-    calendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall'
-  }
+    calendarUrl:
+      'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Java+MCQ+Exam&dates=20260624T023500Z/20260624T033500Z&details=There+will+be+a+Java+MCQ+exam.+It+carries+5+marks+internal+assessment.+Attendance+is+highly+appreciated.&location=Oxford+Exam+Hall',
+  },
 };
 
 export default function JavaExamNotice() {
@@ -515,7 +689,7 @@ export default function JavaExamNotice() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showSyllabus, setShowSyllabus] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
+
   // Countdown Timer State
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -543,9 +717,15 @@ export default function JavaExamNotice() {
 
     const updateTimer = () => {
       const diff = targetTime - Date.now();
-      
+
       if (diff <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, isExpired: true });
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+          isExpired: true,
+        });
         return;
       }
 
@@ -573,7 +753,9 @@ export default function JavaExamNotice() {
       <div className="flex min-h-screen flex-col items-center justify-center bg-zinc-200 p-6 font-serif text-slate-800">
         <div className="text-center p-8 bg-white border-2 border-blue-800 shadow-md rounded max-w-sm">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-800 mx-auto"></div>
-          <p className="mt-4 font-bold text-sm tracking-wider text-blue-800">PORTAL INITIALIZING / लोड हुँदैछ...</p>
+          <p className="mt-4 font-bold text-sm tracking-wider text-blue-800">
+            PORTAL INITIALIZING / लोड हुँदैछ...
+          </p>
         </div>
       </div>
     );
@@ -584,7 +766,6 @@ export default function JavaExamNotice() {
 
   return (
     <div className="min-h-screen bg-[#f4f7f9] font-serif text-slate-900 pb-16 relative">
-      
       {/* College Info Top Banner (Deep Blue) */}
       <div className="bg-[#0b5c9e] text-white text-[11px] sm:text-xs py-2 px-4 font-sans tracking-wide flex flex-wrap justify-between items-center gap-2">
         <div className="flex items-center gap-4">
@@ -596,37 +777,99 @@ export default function JavaExamNotice() {
           </span>
         </div>
         <div className="flex items-center gap-4 text-[10px] sm:text-xs text-white/90">
-          <a href="#" className="hover:underline">Campus Life</a> | 
-          <a href="#" className="hover:underline">Apply Online</a> | 
-          <a href="#" className="hover:underline">Alumni</a> | 
-          <a href="#" className="hover:underline">Achievements</a> | 
-          <a href="#" className="hover:underline">CSR</a>
+          <a href="#" className="hover:underline">
+            Campus Life
+          </a>{' '}
+          |
+          <a href="#" className="hover:underline">
+            Apply Online
+          </a>{' '}
+          |
+          <a href="#" className="hover:underline">
+            Alumni
+          </a>{' '}
+          |
+          <a href="#" className="hover:underline">
+            Achievements
+          </a>{' '}
+          |
+          <a href="#" className="hover:underline">
+            CSR
+          </a>
         </div>
       </div>
 
       {/* Main Branding Header */}
       <header className="bg-white py-4 px-4 sm:px-6 shadow-sm border-b border-zinc-200">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
-          
           {/* Logo / Crest Area */}
           <div className="flex items-center gap-2.5">
             {/* Elegant SVG Crest matching Oxford College Logo exactly */}
             <div className="w-14 h-14 bg-white text-[#0b5c9e] flex items-center justify-center rounded-full border-2 border-blue-500 shadow-sm relative overflow-hidden flex-shrink-0">
               <svg viewBox="0 0 100 100" className="w-12 h-12">
                 {/* Outer rings */}
-                <circle cx="50" cy="50" r="46" fill="none" stroke="#eab308" strokeWidth="1.8" />
-                <circle cx="50" cy="50" r="42" fill="none" stroke="#0b5c9e" strokeWidth="1.2" />
-                
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="46"
+                  fill="none"
+                  stroke="#eab308"
+                  strokeWidth="1.8"
+                />
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="42"
+                  fill="none"
+                  stroke="#0b5c9e"
+                  strokeWidth="1.2"
+                />
+
                 {/* Six-pointed star (Hexagram) */}
-                <polygon points="50,16 76,62 24,62" fill="none" stroke="#0b5c9e" strokeWidth="1.5" />
-                <polygon points="50,68 76,22 24,22" fill="none" stroke="#0b5c9e" strokeWidth="1.5" />
-                
+                <polygon
+                  points="50,16 76,62 24,62"
+                  fill="none"
+                  stroke="#0b5c9e"
+                  strokeWidth="1.5"
+                />
+                <polygon
+                  points="50,68 76,22 24,22"
+                  fill="none"
+                  stroke="#0b5c9e"
+                  strokeWidth="1.5"
+                />
+
                 {/* Inner Shield / Circle */}
-                <circle cx="50" cy="42" r="8" fill="white" stroke="#0b5c9e" strokeWidth="1.2" />
-                <text x="50" y="45" fontSize="8" fontWeight="bold" fill="#0b5c9e" textAnchor="middle">OX</text>
-                
+                <circle
+                  cx="50"
+                  cy="42"
+                  r="8"
+                  fill="white"
+                  stroke="#0b5c9e"
+                  strokeWidth="1.2"
+                />
+                <text
+                  x="50"
+                  y="45"
+                  fontSize="8"
+                  fontWeight="bold"
+                  fill="#0b5c9e"
+                  textAnchor="middle"
+                >
+                  OX
+                </text>
+
                 {/* ESTD 2000 */}
-                <text x="50" y="80" fontSize="5" fontWeight="bold" fill="#0b5c9e" textAnchor="middle">ESTD. 2000</text>
+                <text
+                  x="50"
+                  y="80"
+                  fontSize="5"
+                  fontWeight="bold"
+                  fill="#0b5c9e"
+                  textAnchor="middle"
+                >
+                  ESTD. 2000
+                </text>
               </svg>
             </div>
             <div>
@@ -661,8 +904,13 @@ export default function JavaExamNotice() {
               RESEARCH <IconChevronDown size={12} />
             </span>
             <span className="hover:text-[#0b5c9e] cursor-pointer">BLOG</span>
-            <span className="hover:text-[#0b5c9e] cursor-pointer">DOWNLOADS</span>
-            <IconSearch size={16} className="text-slate-500 cursor-pointer hover:text-[#0b5c9e]" />
+            <span className="hover:text-[#0b5c9e] cursor-pointer">
+              DOWNLOADS
+            </span>
+            <IconSearch
+              size={16}
+              className="text-slate-500 cursor-pointer hover:text-[#0b5c9e]"
+            />
           </div>
 
           {/* Mobile Menu Button */}
@@ -679,14 +927,28 @@ export default function JavaExamNotice() {
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-b border-zinc-200 px-6 py-4 font-sans text-xs font-bold text-slate-700 flex flex-col gap-3 shadow-md">
           <span className="hover:text-[#0b5c9e] cursor-pointer py-1">HOME</span>
-          <span className="hover:text-[#0b5c9e] cursor-pointer py-1 flex items-center justify-between">ABOUT <IconChevronDown size={12} /></span>
-          <span className="hover:text-[#0b5c9e] cursor-pointer py-1 flex items-center justify-between">MEMBERS <IconChevronDown size={12} /></span>
-          <span className="hover:text-[#0b5c9e] cursor-pointer py-1 flex items-center justify-between">PROGRAMS <IconChevronDown size={12} /></span>
-          <span className="hover:text-[#0b5c9e] cursor-pointer py-1 flex items-center justify-between">EXAMINATION <IconChevronDown size={12} /></span>
-          <span className="hover:text-[#0b5c9e] cursor-pointer py-1 flex items-center justify-between">FACILITIES <IconChevronDown size={12} /></span>
-          <span className="hover:text-[#0b5c9e] cursor-pointer py-1 flex items-center justify-between">RESEARCH <IconChevronDown size={12} /></span>
+          <span className="hover:text-[#0b5c9e] cursor-pointer py-1 flex items-center justify-between">
+            ABOUT <IconChevronDown size={12} />
+          </span>
+          <span className="hover:text-[#0b5c9e] cursor-pointer py-1 flex items-center justify-between">
+            MEMBERS <IconChevronDown size={12} />
+          </span>
+          <span className="hover:text-[#0b5c9e] cursor-pointer py-1 flex items-center justify-between">
+            PROGRAMS <IconChevronDown size={12} />
+          </span>
+          <span className="hover:text-[#0b5c9e] cursor-pointer py-1 flex items-center justify-between">
+            EXAMINATION <IconChevronDown size={12} />
+          </span>
+          <span className="hover:text-[#0b5c9e] cursor-pointer py-1 flex items-center justify-between">
+            FACILITIES <IconChevronDown size={12} />
+          </span>
+          <span className="hover:text-[#0b5c9e] cursor-pointer py-1 flex items-center justify-between">
+            RESEARCH <IconChevronDown size={12} />
+          </span>
           <span className="hover:text-[#0b5c9e] cursor-pointer py-1">BLOG</span>
-          <span className="hover:text-[#0b5c9e] cursor-pointer py-1">DOWNLOADS</span>
+          <span className="hover:text-[#0b5c9e] cursor-pointer py-1">
+            DOWNLOADS
+          </span>
         </div>
       )}
 
@@ -699,17 +961,22 @@ export default function JavaExamNotice() {
 
       {/* Scrolling Warning Marquee - Classic Nepalese college site feature */}
       <div className="bg-amber-300 text-neutral-900 border-b border-amber-400 py-1.5 px-4 font-sans font-bold text-xs overflow-hidden whitespace-nowrap shadow-sm">
-        {React.createElement('marquee', { scrollamount: '5', className: 'cursor-default' } as any, t.marqueeText)}
+        {React.createElement(
+          'marquee',
+          { scrollamount: '5', className: 'cursor-default' } as any,
+          t.marqueeText
+        )}
       </div>
 
       {/* Misty gaindakot river backdrop filter overlay */}
-      <div className="absolute inset-x-0 top-[180px] bottom-0 -z-10 opacity-30 pointer-events-none"
+      <div
+        className="absolute inset-x-0 top-[180px] bottom-0 -z-10 opacity-30 pointer-events-none"
         style={{
           backgroundImage: `
             radial-gradient(circle at 10% 20%, rgba(179, 214, 237, 0.4) 0%, transparent 60%),
             radial-gradient(circle at 90% 80%, rgba(200, 225, 240, 0.3) 0%, transparent 60%),
             linear-gradient(to bottom, #dbeafe 0%, #ffffff 80%)
-          `
+          `,
         }}
       ></div>
 
@@ -721,8 +988,12 @@ export default function JavaExamNotice() {
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-50 text-[#0b5c9e] mb-2">
                 <IconLanguage size={24} />
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#0b5c9e]">{t.selectTitle}</h2>
-              <p className="text-xs sm:text-sm text-slate-500 mt-1">{t.selectDesc}</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#0b5c9e]">
+                {t.selectTitle}
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                {t.selectDesc}
+              </p>
             </div>
 
             {/* Language Selection Grid */}
@@ -732,13 +1003,19 @@ export default function JavaExamNotice() {
                   key={lang.code}
                   onClick={() => selectLanguage(lang.code)}
                   className={`flex items-center gap-3 p-3 text-left border rounded transition-all hover:bg-blue-50 hover:border-[#0b5c9e] ${
-                    activeCode === lang.code ? 'border-[#0b5c9e] bg-blue-50/50 font-bold' : 'border-zinc-200'
+                    activeCode === lang.code
+                      ? 'border-[#0b5c9e] bg-blue-50/50 font-bold'
+                      : 'border-zinc-200'
                   }`}
                 >
                   <span className="text-2xl flex-shrink-0">{lang.flag}</span>
                   <div>
-                    <div className="text-sm font-semibold text-slate-800">{lang.name}</div>
-                    <div className="text-[10px] text-slate-500">{lang.desc}</div>
+                    <div className="text-sm font-semibold text-slate-800">
+                      {lang.name}
+                    </div>
+                    <div className="text-[10px] text-slate-500">
+                      {lang.desc}
+                    </div>
                   </div>
                 </button>
               ))}
@@ -758,7 +1035,6 @@ export default function JavaExamNotice() {
 
       {/* Main Notice Sheet */}
       <main className="max-w-4xl mx-auto px-4 mt-8 relative">
-        
         {/* Language Quick-Switch button on page */}
         <div className="flex justify-end mb-3">
           <button
@@ -772,10 +1048,12 @@ export default function JavaExamNotice() {
 
         {/* Notice Board Paper */}
         <article className="bg-white border border-zinc-300 border-t-8 border-t-[#0b5c9e] shadow-lg p-6 sm:p-12 relative overflow-hidden">
-          
           {/* Background Watermark Crest */}
           <div className="absolute inset-0 pointer-events-none opacity-[0.012] flex items-center justify-center">
-            <svg viewBox="0 0 100 100" className="w-[450px] h-[450px] fill-current text-[#0b5c9e]">
+            <svg
+              viewBox="0 0 100 100"
+              className="w-[450px] h-[450px] fill-current text-[#0b5c9e]"
+            >
               <polygon points="50,16 76,62 24,62" />
               <polygon points="50,68 76,22 24,22" />
             </svg>
@@ -817,25 +1095,41 @@ export default function JavaExamNotice() {
             <table className="min-w-full divide-y divide-zinc-350 border border-zinc-300 text-xs sm:text-sm">
               <thead className="bg-zinc-50 font-sans">
                 <tr>
-                  <th scope="col" className="px-4 py-2.5 text-left font-bold text-[#0b5c9e] border-r border-zinc-300 uppercase">
+                  <th
+                    scope="col"
+                    className="px-4 py-2.5 text-left font-bold text-[#0b5c9e] border-r border-zinc-300 uppercase"
+                  >
                     {t.tableHeaderItem}
                   </th>
-                  <th scope="col" className="px-4 py-2.5 text-left font-bold text-[#0b5c9e] uppercase">
+                  <th
+                    scope="col"
+                    className="px-4 py-2.5 text-left font-bold text-[#0b5c9e] uppercase"
+                  >
                     {t.tableHeaderVal}
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-zinc-200 font-sans">
                 <tr>
-                  <td className="px-4 py-2.5 font-bold text-slate-600 border-r border-zinc-300">{t.rowDate}</td>
-                  <td className="px-4 py-2.5 font-semibold text-slate-900">{t.rowDateVal}</td>
+                  <td className="px-4 py-2.5 font-bold text-slate-600 border-r border-zinc-300">
+                    {t.rowDate}
+                  </td>
+                  <td className="px-4 py-2.5 font-semibold text-slate-900">
+                    {t.rowDateVal}
+                  </td>
                 </tr>
                 <tr className="bg-zinc-50/50">
-                  <td className="px-4 py-2.5 font-bold text-slate-600 border-r border-zinc-300">{t.rowTime}</td>
-                  <td className="px-4 py-2.5 font-semibold text-slate-900">{t.rowTimeVal}</td>
+                  <td className="px-4 py-2.5 font-bold text-slate-600 border-r border-zinc-300">
+                    {t.rowTime}
+                  </td>
+                  <td className="px-4 py-2.5 font-semibold text-slate-900">
+                    {t.rowTimeVal}
+                  </td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-2.5 font-bold text-slate-600 border-r border-zinc-300">{t.rowMarks}</td>
+                  <td className="px-4 py-2.5 font-bold text-slate-600 border-r border-zinc-300">
+                    {t.rowMarks}
+                  </td>
                   <td className="px-4 py-2.5 font-bold text-amber-700 flex items-center gap-1.5">
                     <IconAward size={16} className="text-amber-500" />
                     {t.rowMarksVal}
@@ -851,7 +1145,7 @@ export default function JavaExamNotice() {
               <IconClock size={14} className="text-red-500" />
               {t.timerTitle}
             </div>
-            
+
             {timeLeft.isExpired ? (
               <div className="text-center font-bold text-sm bg-rose-50 border border-rose-300 text-rose-700 py-3 rounded uppercase font-sans">
                 {t.liveMessage}
@@ -866,7 +1160,10 @@ export default function JavaExamNotice() {
                     { label: t.mins, val: timeLeft.minutes },
                     { label: t.secs, val: timeLeft.seconds },
                   ].map((block, idx) => (
-                    <div key={idx} className="bg-black border border-zinc-900 p-2.5 rounded flex flex-col items-center shadow-inner">
+                    <div
+                      key={idx}
+                      className="bg-black border border-zinc-900 p-2.5 rounded flex flex-col items-center shadow-inner"
+                    >
                       {/* Red LED digital numeric segments */}
                       <span className="font-mono text-xl sm:text-3xl font-bold text-red-500 tracking-tight filter drop-shadow-[0_0_5px_rgba(239,68,68,0.8)]">
                         {String(block.val).padStart(2, '0')}
@@ -883,17 +1180,27 @@ export default function JavaExamNotice() {
 
           {/* Signoff stamp block */}
           <div className="mt-12 flex justify-end relative">
-            
             {/* Authentic Red/Blue official round ink stamp */}
             <div className="absolute right-14 -top-8 pointer-events-none opacity-85 select-none transform -rotate-12">
-              <svg viewBox="0 0 100 100" className="w-24 h-24 text-red-600/80 stroke-current fill-none font-sans font-bold">
+              <svg
+                viewBox="0 0 100 100"
+                className="w-24 h-24 text-red-600/80 stroke-current fill-none font-sans font-bold"
+              >
                 <circle cx="50" cy="50" r="42" strokeWidth="2.5" />
                 <circle cx="50" cy="50" r="37" strokeWidth="1.2" />
-                
+
                 {/* Curved paths for text */}
-                <path id="stamp-text-path" d="M 18,50 A 32,32 0 1,1 82,50" className="hidden" />
-                <path id="stamp-text-path-bottom" d="M 82,50 A 32,32 0 0,1 18,50" className="hidden" />
-                
+                <path
+                  id="stamp-text-path"
+                  d="M 18,50 A 32,32 0 1,1 82,50"
+                  className="hidden"
+                />
+                <path
+                  id="stamp-text-path-bottom"
+                  d="M 82,50 A 32,32 0 0,1 18,50"
+                  className="hidden"
+                />
+
                 <text fontSize="7.5" fill="currentColor" textAnchor="middle">
                   <textPath href="#stamp-text-path" startOffset="50%">
                     * OXFORD COLLEGE OF ENG. & MGMT. *
@@ -904,10 +1211,24 @@ export default function JavaExamNotice() {
                     EXAMINATION DIVISION
                   </textPath>
                 </text>
-                
+
                 {/* Center text box */}
-                <rect x="25" y="44" width="50" height="12" fill="white" stroke="currentColor" strokeWidth="1" />
-                <text x="50" y="52" fontSize="8.5" fill="currentColor" textAnchor="middle">
+                <rect
+                  x="25"
+                  y="44"
+                  width="50"
+                  height="12"
+                  fill="white"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                />
+                <text
+                  x="50"
+                  y="52"
+                  fontSize="8.5"
+                  fill="currentColor"
+                  textAnchor="middle"
+                >
                   APPROVED
                 </text>
               </svg>
@@ -927,7 +1248,6 @@ export default function JavaExamNotice() {
               </div>
             </div>
           </div>
-
         </article>
 
         {/* Buttons / Supplementary Area */}
@@ -939,7 +1259,8 @@ export default function JavaExamNotice() {
             className="flex-1 flex items-center justify-center gap-1.5 px-4 py-3 bg-[#0b5c9e] hover:bg-[#094d85] text-white font-sans font-bold text-xs sm:text-sm uppercase tracking-wider rounded shadow transition-all hover:scale-102"
           >
             <IconCalendar size={16} />
-            {t.btnCalendar} <IconExternalLink size={12} className="inline ml-1" />
+            {t.btnCalendar}{' '}
+            <IconExternalLink size={12} className="inline ml-1" />
           </a>
 
           <button
@@ -961,21 +1282,29 @@ export default function JavaExamNotice() {
             <p className="text-xs text-slate-500 mb-4">{t.syllabusDesc}</p>
             <div className="space-y-3">
               {t.syllabusTopics.map((topic: any, idx: number) => (
-                <div key={idx} className="p-3 bg-zinc-50 border border-zinc-200 rounded">
-                  <h5 className="text-xs sm:text-sm font-bold text-[#0b5c9e]">{topic.name}</h5>
+                <div
+                  key={idx}
+                  className="p-3 bg-zinc-50 border border-zinc-200 rounded"
+                >
+                  <h5 className="text-xs sm:text-sm font-bold text-[#0b5c9e]">
+                    {topic.name}
+                  </h5>
                   <p className="text-xs text-slate-600 mt-1">{topic.detail}</p>
                 </div>
               ))}
             </div>
           </div>
         )}
-
       </main>
 
       {/* Official styled site footer */}
       <footer className="mt-16 text-center text-xs text-slate-500 font-sans border-t border-zinc-200 pt-6">
-        <p>© 2026 Oxford College of Engineering and Management. All Rights Reserved.</p>
-        <p className="text-[10px] text-slate-400 mt-1">Student Notice Portal • Designed by Antigravity AI</p>
+        <p>
+          © 2026 Oxford College of Engineering and Management. Meant for fun.
+        </p>
+        <p className="text-[10px] text-slate-400 mt-1">
+          Student Notice Portal • Designed by Antigravity AI
+        </p>
       </footer>
     </div>
   );
