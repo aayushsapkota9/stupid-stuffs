@@ -1300,10 +1300,10 @@ export default function JavaExamNotice() {
       {/* Official styled site footer */}
       <footer className="mt-16 text-center text-xs text-slate-500 font-sans border-t border-zinc-200 pt-6">
         <p>
-          © 2026 Oxford College of Engineering and Management. Meant for fun.
+          © 2026 Oxford College of Engineering and Management.
         </p>
         <p className="text-[10px] text-slate-400 mt-1">
-          Student Notice Portal • Designed by Antigravity AI
+          Meant for fun and learning purpose.
         </p>
       </footer>
     </div>
